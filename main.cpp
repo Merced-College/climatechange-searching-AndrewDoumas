@@ -8,6 +8,7 @@
 #include "StateClimate.h"
 
 
+//function for binary search to find the index of the state
 int binary_search(std::vector<StateClimate> &vec, int target_fips){
 
     int low = 0;
@@ -33,6 +34,7 @@ int binary_search(std::vector<StateClimate> &vec, int target_fips){
     return -1;
 }
 
+//function for linear search to find the first index of the state
 int search_left(std::vector<StateClimate> &vec, int initial_fips){
     int left_fip = initial_fips;
     bool search_left = true;
@@ -65,18 +67,19 @@ int search_left(std::vector<StateClimate> &vec, int initial_fips){
     
 
 
+//function for linear search to find the last index of the state
 int search_right(std::vector<StateClimate> &vec, int initial_fips){
     
-    int right_fip;
+    int right_fip = initial_fips;
     bool search_right = true;
 
-
+    
     while(search_right){
-        right_fip = initial_fips;
         if( (vec[right_fip].getFips() != vec[right_fip+1].getFips()) 
             && (right_fip <= vec.size()) ){
             return right_fip;
         }
+        //increments right fips
         else{
             initial_fips++;
         }
@@ -86,6 +89,7 @@ int search_right(std::vector<StateClimate> &vec, int initial_fips){
     
 }
 
+//function for linear search to find if the state name is in the array
 int validate_name(std::string name, std::array<std::string,50>state_names){
 
     for(int i = 0; i < state_names.size(); i++){
@@ -120,7 +124,8 @@ int main() {
 
     file.close();
 
-    
+
+    //parrallel arrays for state names and fips
     std::array<int, 50> fip_code = {1, 2, 4, 5, 6, 8, 9, 10, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 51, 53, 54, 55, 56};
     std::array<std::string, 50> state_names = {"ALABAMA", "ALASKA", "ARIZONA", "ARKANSAS", "CALIFORNIA", "COLORADO", "CONNECTICUT", "DELAWARE", "FLORIDA", "GEORGIA", "HAWAII", "IDAHO", "ILLINOIS", "INDIANA", "IOWA", "KANSAS", "KENTUCKY", "LOUISIANA", "MAINE", "MARYLAND", "MASSACHUSETTS", "MICHIGAN", "MINNESOTA", "MISSISSIPPI", "MISSOURI", "MONTANA", "NEBRASKA", "NEVADA", "NEW HAMPSHIRE", "NEW JERSEY", "NEW MEXICO", "NEW YORK", "NORTH CAROLINA", "NORTH DAKOTA", "OHIO", "OKLAHOMA", "OREGON", "PENNSYLVANIA", "RHODE ISLAND", "SOUTH CAROLINA", "SOUTH DAKOTA", "TENNESSEE", "TEXAS", "UTAH", "VERMONT", "VIRGINIA", "WASHINGTON", "WEST VIRGINIA", "WISCONSIN", "WYOMING"};
 
@@ -133,7 +138,7 @@ int main() {
     }
     */
     
-    
+    /*
     int j = 0;
      // Display data
      for (const auto &entry : climateData) {
@@ -141,7 +146,7 @@ int main() {
          entry.display();
          j++;
      }
-     
+     *///for testing
 
     std::string target_name = "";
     bool choose_state = true;
@@ -188,11 +193,14 @@ int main() {
         //std::cout<<left_fips<<std::endl;
         //std::cout<< climateData[left_fips].getFips()<<", "<< climateData[left_fips].getYear()<<", "<< climateData[left_fips].getTemp()<<", "<< climateData[left_fips].getTempC()<<std::endl;
 
+
+        
         //searches through to find the last fip of the target number
         right_fips = search_right(climateData, initial_loaction);
         std::cout<<right_fips<<std::endl;
         //std::cout<< climateData[right_fips].getFips()<<", "<< climateData[right_fips].getYear()<<", "<< climateData[right_fips].getTemp()<<", "<< climateData[right_fips].getTempC()<<std::endl;
 
+        //displays the data for the target fips
         for(int i = left_fips; i <= right_fips; i++){
 
             
