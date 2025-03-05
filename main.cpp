@@ -1,4 +1,7 @@
 // main.cpp
+//Andrew Doumas
+//3/4/25
+//climate change data searching
 #include <iostream>
 #include <fstream>
 #include <vector>
